@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: socialuser
+      POSTGRES_PASSWORD: socialpass
+      POSTGRES_DB: socialdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data 
+  
+  auth-service:
+    build:
+      context: ./backend/auth-service
+      target: development
+
+      args:
+        DATABASE_URL: postgresql://socialuser:socialpass@db:5432/socialdb?schema=public
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://socialuser:socialpass@db:5432/socialdb?schema=public
+      PORT: 3000
+      JWT_SECRET: aa112233
+    volumes:
+      - ./backend/auth-service:/usr/src/app 
+      - /usr/src/app/node_modules    
+    command: sh -c "npm run prisma:migrate && npm run dev" 
+
+  post-service:
+    build:
+      context: ./backend/post-service
+      target: development
+      args:
+        DATABASE_URL: postgresql://socialuser:socialpass@db:5432/socialdb?schema=public
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db 
+      - auth-service
+    environment:
+      DATABASE_URL: postgresql://socialuser:socialpass@db:5432/socialdb?schema=public
+      PORT: 3001
+      JWT_SECRET: aa112233 
+    volumes:
+      - ./backend/post-service:/usr/src/app
+      - /usr/src/app/node_modules
+    command: sh -c "npx prisma generate && npm run dev"    
+
+volumes:
+  postgres_data:

@@ -1,0 +1,8 @@
+/* frontend/src/index.css (Versión limpia) */
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+#root {
+  min-height: 100vh;
+}

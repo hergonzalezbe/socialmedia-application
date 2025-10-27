@@ -1,0 +1,33 @@
+GET http://localhost:3000/api-docs HTTP/1.1
+
+###
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "hernan_alias", 
+    "password": "pass123"
+}
+
+###
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "hernan_alias", 
+    "password": "clave-incorrecta"
+}
+
+###
+POST http://localhost:3001/posts HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiaGVybmFuX2FsaWFzIiwiaWF0IjoxNzYxNTMxNjA1LCJleHAiOjE3NjE1MzUyMDV9.2UoMaxtEy5bcHWhd3pm1SprxMbu3QI-TlrHkqRyLv6M
+
+{
+    "message": "¡Mi primer post en el microservicio de publicaciones!"
+}
+
+###
+GET http://localhost:3001/posts HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiaGVybmFuX2FsaWFzIiwiaWF0IjoxNzYxNTMxNjA1LCJleHAiOjE3NjE1MzUyMDV9.2UoMaxtEy5bcHWhd3pm1SprxMbu3QI-TlrHkqRyLv6M

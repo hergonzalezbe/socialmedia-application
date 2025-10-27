@@ -1,0 +1,39 @@
+# Ignorar las dependencias del servicio de autenticación
+backend/auth-service/node_modules/
+
+# Ignorar las dependencias del servicio de publicaciones
+backend/post-service/node_modules/
+
+# Ignorar las dependencias del frontend
+frontend/node_modules/
+
+backend/auth-service/.env
+backend/front-service/.env
+
+backend/auth-service/src/generated/prisma
+backend/post-service/src/generated/prisma
+
+# Logs
+frontend/logs
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr
+frontend/*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

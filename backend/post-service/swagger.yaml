@@ -1,0 +1,29 @@
+# backend/post-service/swagger.yaml
+openapi: 3.0.0
+info:
+  title: SocialMedia Post Service API
+  version: 1.0.0
+  description: API para la gestión de publicaciones y likes.
+servers:
+  - url: http://localhost:3001
+    description: Servidor de Publicaciones
+
+components:
+  securitySchemes:
+    bearerAuth: # Mismo esquema JWT para rutas protegidas
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  # Rutas de Publicaciones (las implementaremos en la Etapa 3)
+  /posts:
+    get:
+      tags:
+        - Publicaciones
+      summary: Lista todas las publicaciones de los usuarios.
+      responses:
+        '200':
+          description: Lista de publicaciones obtenida.
+
+# Esquemas de datos aquí... (se agregarán más tarde)
